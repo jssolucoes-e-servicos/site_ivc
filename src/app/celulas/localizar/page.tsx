@@ -1,5 +1,5 @@
-import { MapPin } from "lucide-react"
 import { CelulaMap } from "@/components/celula-map"
+import { MapPin } from "lucide-react"
 import Script from "next/script"
 
 export default function LocalizarCelulaPage() {

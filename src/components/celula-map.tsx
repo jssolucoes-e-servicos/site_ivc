@@ -1,72 +1,84 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { MapPin, Search, Navigation, Users, Calendar, Clock } from "lucide-react"
 import { celulas, igrejaLocation, type Celula } from "@/lib/celulas-data"
-import { google } from "google-maps"
+import { Loader } from "@googlemaps/js-api-loader"
+import { Calendar, Clock, MapPin, Navigation, Search, Users } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 
 export function CelulaMap() {
   const mapRef = useRef<HTMLDivElement>(null)
-  const [map, setMap] = useState<google.maps.Map | null>(null)
+  const [map, setMap] = useState<any | null>(null)
   const [searchAddress, setSearchAddress] = useState("")
   const [nearestCelulas, setNearestCelulas] = useState<Celula[]>([])
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (!mapRef.current) return
 
-    // Inicializar o mapa
-    const googleMap = new google.maps.Map(mapRef.current, {
-      center: { lat: igrejaLocation.lat, lng: igrejaLocation.lng },
-      zoom: 14,
-      styles: [
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [{ visibility: "off" }],
-        },
-      ],
+    const loader = new Loader({
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+      version: "weekly",
+      libraries: ["places", "geocoding"],
     })
 
-    setMap(googleMap)
+    loader
+      .load()
+      .then(() => {
+        if (!mapRef.current) return
 
-    // Adicionar marcador da igreja com ícone customizado
-    new google.maps.Marker({
-      position: { lat: igrejaLocation.lat, lng: igrejaLocation.lng },
-      map: googleMap,
-      title: igrejaLocation.nome,
-      icon: {
-        path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
-        fillColor: "#0891b2",
-        fillOpacity: 1,
-        strokeWeight: 2,
-        strokeColor: "#ffffff",
-        scale: 2,
-        anchor: new google.maps.Point(12, 22),
-      },
-    })
+        const googleMap = new window.google.maps.Map(mapRef.current, {
+          center: { lat: igrejaLocation.lat, lng: igrejaLocation.lng },
+          zoom: 14,
+          styles: [
+            {
+              featureType: "poi",
+              elementType: "labels",
+              stylers: [{ visibility: "off" }],
+            },
+          ],
+        })
 
-    // Adicionar marcadores das células
-    celulas.forEach((celula) => {
-      const marker = new google.maps.Marker({
-        position: { lat: celula.lat, lng: celula.lng },
-        map: googleMap,
-        title: celula.nome,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: "#06b6d4",
-          fillOpacity: 0.8,
-          strokeWeight: 2,
-          strokeColor: "#ffffff",
-          scale: 8,
-        },
-      })
+        setMap(googleMap)
+        setIsLoading(false)
 
-      const infoWindow = new google.maps.InfoWindow({
-        content: `
+        // Adicionar marcador da igreja com ícone customizado
+        new window.google.maps.Marker({
+          position: { lat: igrejaLocation.lat, lng: igrejaLocation.lng },
+          map: googleMap,
+          title: igrejaLocation.nome,
+          icon: {
+            path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+            fillColor: "#0891b2",
+            fillOpacity: 1,
+            strokeWeight: 2,
+            strokeColor: "#ffffff",
+            scale: 2,
+            anchor: new window.google.maps.Point(12, 22),
+          },
+        })
+
+        // Adicionar marcadores das células
+        celulas.forEach((celula) => {
+          const marker = new window.google.maps.Marker({
+            position: { lat: celula.lat, lng: celula.lng },
+            map: googleMap,
+            title: celula.nome,
+            icon: {
+              path: window.google.maps.SymbolPath.CIRCLE,
+              fillColor: "#06b6d4",
+              fillOpacity: 0.8,
+              strokeWeight: 2,
+              strokeColor: "#ffffff",
+              scale: 8,
+            },
+          })
+
+          const infoWindow = new window.google.maps.InfoWindow({
+            content: `
           <div style="padding: 8px; max-width: 200px;">
             <h3 style="font-weight: bold; margin-bottom: 8px; color: #0891b2;">${celula.nome}</h3>
             <p style="margin: 4px 0; font-size: 14px;"><strong>Líder:</strong> ${celula.lider}</p>
@@ -74,12 +86,17 @@ export function CelulaMap() {
             <p style="margin: 4px 0; font-size: 14px;"><strong>Dia:</strong> ${celula.dia} às ${celula.horario}</p>
           </div>
         `,
-      })
+          })
 
-      marker.addListener("click", () => {
-        infoWindow.open(googleMap, marker)
+          marker.addListener("click", () => {
+            infoWindow.open(googleMap, marker)
+          })
+        })
       })
-    })
+      .catch((error) => {
+        console.error("Erro ao carregar Google Maps:", error)
+        setIsLoading(false)
+      })
   }, [])
 
   const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -96,7 +113,7 @@ export function CelulaMap() {
   const handleSearch = async () => {
     if (!searchAddress || !map) return
 
-    const geocoder = new google.maps.Geocoder()
+    const geocoder = new window.google.maps.Geocoder()
     geocoder.geocode({ address: searchAddress + ", Restinga, Porto Alegre, RS" }, (results, status) => {
       if (status === "OK" && results && results[0]) {
         const location = results[0].geometry.location
@@ -109,13 +126,12 @@ export function CelulaMap() {
         map.setCenter({ lat, lng })
         map.setZoom(15)
 
-        // Adicionar marcador do usuário
-        new google.maps.Marker({
+        new window.google.maps.Marker({
           position: { lat, lng },
           map: map,
           title: "Sua localização",
           icon: {
-            path: google.maps.SymbolPath.CIRCLE,
+            path: window.google.maps.SymbolPath.CIRCLE,
             fillColor: "#ef4444",
             fillOpacity: 1,
             strokeWeight: 2,
@@ -124,7 +140,6 @@ export function CelulaMap() {
           },
         })
 
-        // Calcular células mais próximas
         const celulasComDistancia = celulas.map((celula) => ({
           ...celula,
           distancia: calculateDistance(lat, lng, celula.lat, celula.lng),
@@ -150,12 +165,12 @@ export function CelulaMap() {
             map.setCenter({ lat, lng })
             map.setZoom(15)
 
-            new google.maps.Marker({
+            new window.google.maps.Marker({
               position: { lat, lng },
               map: map,
               title: "Sua localização",
               icon: {
-                path: google.maps.SymbolPath.CIRCLE,
+                path: window.google.maps.SymbolPath.CIRCLE,
                 fillColor: "#ef4444",
                 fillOpacity: 1,
                 strokeWeight: 2,
@@ -199,11 +214,11 @@ export function CelulaMap() {
               />
             </div>
             <div className="flex gap-2">
-              <Button onClick={handleSearch} className="bg-cyan-600 hover:bg-cyan-700">
+              <Button onClick={handleSearch} className="bg-cyan-600 hover:bg-cyan-700" disabled={isLoading}>
                 <Search className="mr-2 h-4 w-4" />
                 Buscar
               </Button>
-              <Button onClick={handleUseMyLocation} variant="outline">
+              <Button onClick={handleUseMyLocation} variant="outline" disabled={isLoading}>
                 <Navigation className="mr-2 h-4 w-4" />
                 Usar Minha Localização
               </Button>
@@ -220,7 +235,13 @@ export function CelulaMap() {
         <div className="lg:col-span-2">
           <Card>
             <CardContent className="p-0">
-              <div ref={mapRef} className="w-full h-[500px] rounded-lg" />
+              {isLoading ? (
+                <div className="w-full h-[500px] rounded-lg flex items-center justify-center bg-muted">
+                  <p className="text-muted-foreground">Carregando mapa...</p>
+                </div>
+              ) : (
+                <div ref={mapRef} className="w-full h-[500px] rounded-lg" />
+              )}
             </CardContent>
           </Card>
         </div>
