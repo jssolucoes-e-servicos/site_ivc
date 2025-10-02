@@ -46,13 +46,13 @@ const params = await searchParams;
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LANDING_PAGE_MEDIA.videos.map((video, index) => (
               <div key={index} className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <video src={video.url} controls className="w-full h-auto"></video>
+                <video src={video.url} controls className="w-full h-96"></video>
                 <p className="p-4 text-center font-semibold">{video.description}</p>
               </div>
             ))}
             {LANDING_PAGE_MEDIA.images.map((image, index) => (
               <div key={index} className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <img src={image.url} alt={image.description} className="w-full h-auto object-cover" />
+                <img src={image.url} alt={image.description} className="w-full h-96 object-cover" />
                 <p className="p-4 text-center font-semibold">{image.description}</p>
               </div>
             ))}
