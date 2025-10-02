@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { LANDING_PAGE_MEDIA } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
+import { MediaCarousel } from "./MediaCarousel";
 
 interface PreVendaProps {
   searchParams: Promise<{ v?: string }>;
@@ -15,6 +16,7 @@ export default async function DogaoDoPastorPage({ searchParams }: PreVendaProps)
 
 const params = await searchParams;
   const sellerSlug = params.v || 'dogao';
+
   
   return (
     <div className="flex flex-col">
@@ -36,29 +38,40 @@ const params = await searchParams;
         </div>
         <div className="absolute inset-0 bg-black opacity-30"></div>
       </section>
+        <section className="py-20 px-4">
+            <div className="container mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+                    Momentos Inesquecíveis
+                </h2>
+                {/* O Grid com 3 colunas é mantido! */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    {/* COLUNA 1: Carrossel de Vídeos */}
+                    <div className="h-full">
+                        <MediaCarousel 
+                            mediaItems={LANDING_PAGE_MEDIA.videos}
+                            mediaType="video"
+                        />
+                    </div>
 
-      {/* Media Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Momentos Inesquecíveis
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {LANDING_PAGE_MEDIA.videos.map((video, index) => (
-              <div key={index} className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <video src={video.url} controls className="w-full h-96"></video>
-                <p className="p-4 text-center font-semibold">{video.description}</p>
-              </div>
-            ))}
-            {LANDING_PAGE_MEDIA.images.map((image, index) => (
-              <div key={index} className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <img src={image.url} alt={image.description} className="w-full h-96 object-cover" />
-                <p className="p-4 text-center font-semibold">{image.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                    {/* COLUNA 2: Carrossel de Imagens */}
+                    <div className="h-full">
+                        <MediaCarousel 
+                            mediaItems={LANDING_PAGE_MEDIA.images}
+                            mediaType="image"
+                        />
+                    </div>
+                    
+                    {/* COLUNA 3: Carrossel de Patrocínios */}
+                    <div className="h-full">
+                        <MediaCarousel 
+                            mediaItems={LANDING_PAGE_MEDIA.patrocinios}
+                            mediaType="image"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
 
       <DogaoRules />
     </div>
