@@ -9,7 +9,7 @@ export default function DogaoDoPastorPage() {
       <section className="relative bg-orange-600 text-white py-24 md:py-36 text-center overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">
-            Promoção de Pré-venda: Concora a uma Noite Especial no Natal Luz de Gramado + Jantar com Foundee, com acompanhante!
+            Promoção de Pré-venda: Concorra a uma Noite Especial no Natal Luz de Gramado + Jantar com Foundee, com acompanhante!
           </h1>
           <p className="text-xl md:text-2xl font-light mb-8 animate-fade-in-up">
             Participe da nossa pré-venda e concorra a uma pernoite incrível Gramado/RS!
