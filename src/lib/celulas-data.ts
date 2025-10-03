@@ -26,26 +26,35 @@ export const redes: Rede[] = [
     nome: "Viva KIDS",
     descricao:
       "Rede de células voltada para crianças, onde elas aprendem sobre Jesus de forma lúdica e divertida, desenvolvendo valores cristãos desde cedo.",
-    supervisor: "Líder a definir",
-    cor: "bg-yellow-500",
-    publico: "Crianças de 4 a 11 anos",
+    supervisor: "Pra.Shirlei Santos",
+    cor: "bg-orange-500",
+    publico: "Crianças de 4 a 9 anos",
+  },
+  {
+    id: "rede-junis",
+    nome: "Rede JUNIS",
+    descricao:
+      "Rede para pr-adolescentes , focada em questões relevantes para essa fase da vida, sempre à luz da Palavra.",
+    supervisor: "Pra. Shirlei",
+    cor: "bg-purple-500",
+    publico: "Pré-Adolescentes (10-13 anos)",
   },
   {
     id: "rede-jovem",
     nome: "Rede Jovem",
     descricao:
       "Células para jovens que buscam crescer na fé, desenvolver relacionamentos saudáveis e descobrir seu propósito em Deus.",
-    supervisor: "Líder a definir",
-    cor: "bg-purple-500",
-    publico: "Jovens de 12 a 17 anos",
+    supervisor: "Kélvin Tocha",
+    cor: "bg-indigo-500",
+    publico: "Jovens de 13 a 19 anos",
   },
   {
     id: "rede-ebenezer",
     nome: "Rede Ebenézer",
     descricao:
       "Rede focada em adultos que desejam aprofundar seu conhecimento bíblico e fortalecer sua caminhada cristã através da comunhão.",
-    supervisor: "Líder a definir",
-    cor: "bg-blue-500",
+    supervisor: "Anderson Briance",
+    cor: "bg-Back-500",
     publico: "Adultos",
   },
   {
@@ -53,7 +62,7 @@ export const redes: Rede[] = [
     nome: "Rede Jardim Regado",
     descricao:
       "Células que cultivam relacionamentos profundos e verdadeiros, onde cada membro é cuidado e regado com amor e palavra de Deus.",
-    supervisor: "Líder a definir",
+    supervisor: "Jackson dos Santos",
     cor: "bg-green-500",
     publico: "Adultos",
   },
@@ -62,19 +71,20 @@ export const redes: Rede[] = [
     nome: "Rede Vida",
     descricao:
       "Rede dedicada a compartilhar a vida em Cristo, promovendo transformação e crescimento espiritual através do discipulado.",
-    supervisor: "Líder a definir",
-    cor: "bg-red-500",
+    supervisor: "Letícia Porto",
+    cor: "bg-indigo-700",
     publico: "Adultos",
   },
   {
-    id: "rede-junis",
-    nome: "Rede JUNIS",
+    id: "rede-viva",
+    nome: "Rede Viva",
     descricao:
-      "Rede para jovens universitários e jovens adultos, focada em questões relevantes para essa fase da vida, sempre à luz da Palavra.",
-    supervisor: "Líder a definir",
-    cor: "bg-orange-500",
-    publico: "Jovens adultos (18-30 anos)",
+      "Rede dedicada a compartilhar a vida em Cristo, promovendo transformação e crescimento espiritual através do discipulado.",
+    supervisor: "Pr. Fabiano Santos",
+    cor: "bg-cyan-700",
+    publico: "Adultos",
   },
+  
 ]
 
 // Coordenadas da igreja: Av. Dr. João Dentice, 241, Restinga, Porto Alegre
