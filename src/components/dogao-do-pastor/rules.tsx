@@ -23,7 +23,7 @@ export async function DogaoRules() {
               O prêmio inclui uma pernoite para duas pessoas em um hotel selecionado em Gramado/RS, mais jantar com Foundee.
             </li>
             <li>
-              Em caso de duvidas chame nossa equipe de recepção pelo <Link href={"https://wa.me/5551936183218"}>whatsapp (51) 936.183.218</Link>
+              Em caso de duvidas chame nossa equipe de recepção pelo <Link href={"https://wa.me/5551936183218"} className="cursor-pointer font-bold text-green-800">whatsapp (51) 936.183.218</Link>
             </li>
           </ul>
         </div>

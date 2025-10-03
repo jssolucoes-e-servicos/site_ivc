@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
  * @param {MediaItem[]} mediaItems - Array de objetos de mídia.
  * @param {string} mediaType - "video" ou "image".
  */
-export function MediaCarousel({ mediaItems, mediaType }) {
+export function DogaoMediaCarousel({ mediaItems, mediaType }) {
   // Se houver apenas 1 item, a lógica é a mesma, sem carrossel.
   if (mediaItems.length === 1) {
     const item = mediaItems[0];
