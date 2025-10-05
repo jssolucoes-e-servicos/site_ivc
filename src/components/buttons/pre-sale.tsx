@@ -19,10 +19,10 @@ export async function PreSaleButton({tag}:{tag:string}){
   }
 
   return(<Fragment>
-<Link href={`https://dogao.igrejavivaemcelulas.com.br/pre-venda?v=${tag}`}>
+<Link href={`https://dogao.igrejavivaemcelulas.com.br/comprar?v=${tag}`}>
   {/* <Button
     className="
-       w-full md:w-fit lg:w-xl h-16 lg:h-24 py-3 px-4 lg:px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 gap-4 lg:gap-8 flex  items-center"
+      w-full md:w-fit lg:w-xl h-16 lg:h-24 py-3 px-4 lg:px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 gap-4 lg:gap-8 flex  items-center"
   > */}
   <Button className="bg-white hover:bg-gray-100 w-full md:w-fit xl:w-xl lg:h-22 h-16 py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 ">
     <ImageHotdog />
