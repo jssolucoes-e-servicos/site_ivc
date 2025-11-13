@@ -6,7 +6,7 @@ export async function DogaoRules() {
     <section className="bg-orange-100 py-20 px-4">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-          Regras da Campanha
+          Regras da Campanha - Natal luz de Gramado
         </h2>
         <div className="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto">
           <ul className="list-disc list-inside space-y-4 text-lg text-gray-700">
