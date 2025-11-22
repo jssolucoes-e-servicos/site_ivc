@@ -1,4 +1,3 @@
-import { PreSaleButton } from "@/components/buttons/pre-sale";
 import { DogaoMediaCarousel } from "@/components/dogao-do-pastor/media-carousel";
 import { DogaoRules } from "@/components/dogao-do-pastor/rules";
 import { LANDING_PAGE_MEDIA } from "@/constants";
@@ -25,12 +24,18 @@ export default async function DogaoDoPastorPage({ searchParams }: PreVendaProps)
       <section className="relative bg-orange-600 text-white py-24 md:py-36 text-center overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 items-center">
           <h1 className="text-2xl md:text-5xl font-extrabold leading-tight mb-4 animate-fade-in-down">
-            Adquira seu dogão online! E nos ajude a comprarmos nossa sede.
+            {/* Adquira seu dogão online! E nos ajude a comprarmos nossa sede. */}
+            Vendas encerradas, até a próxima edição!
           </h1>
+
+
+
+
+
           {/* <p className="text-xl md:text-2xl font-light mb-8 animate-fade-in-up">
             Participe da nossa pré-venda e concorra a uma pernoite incrível Gramado/RS!
           </p> */}
-          <PreSaleButton tag={sellerSlug} />
+          {/* <PreSaleButton tag={sellerSlug} /> */}
         </div>
         <div className="absolute inset-0 bg-black opacity-30"></div>
       </section>
